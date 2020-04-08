@@ -4,16 +4,21 @@
 
 Status initStack(SqStack *s,int sizes){
 	//printf("%d",s);
+	
 	s = (SqStack *)malloc(sizeof(SqStack));
 	//printf("%d",s);
-	if(s == NULL){
+	if(s == NULL ){
 		return ERROR;
 	}
+	
 	ElemType stack[sizes] = {0};
 	s->elem = stack;
 	s->top = s->size = 0; 
-	
 	return SUCCESS;
+
+	
+	
+	
 }
 
 Status isEmptyStack(SqStack *s){
@@ -51,12 +56,14 @@ Status destroyStack(SqStack *s){
 	if(s == NULL){
 		return ERROR;
 	}else{
-		free(s->elem);
+		//free(s->elem);
 //		for(int i = 0;i < s->size;i++){
 //			free(s->elem[i]);
 //		}
+		s->elem = NULL;
 		s->size = s->top = 0;
 		free(s);
+		s = NULL;
 		return SUCCESS;
 	}
 }

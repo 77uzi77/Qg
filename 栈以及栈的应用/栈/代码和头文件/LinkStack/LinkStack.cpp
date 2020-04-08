@@ -1,6 +1,7 @@
 #include "../head/LinkStack.h"
 #include <stdio.h>
 #include <stdlib.h>
+
 Status initLStack(LinkStack *s){
 	//printf("%d\n", s);
 	if( /*s = (LinkStack *)malloc(sizeof(LinkStack))*/s  ){
@@ -40,7 +41,7 @@ Status clearLStack(LinkStack *s){
 	if(s == NULL) return ERROR;
 	s->count = 0;
 	StackNode *p,*q;
-	p = s->top->next;
+	p = s->top;
 	while(p != NULL){
 		q = p->next;
 		free(p);

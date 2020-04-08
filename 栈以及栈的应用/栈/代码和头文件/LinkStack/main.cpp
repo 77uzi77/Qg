@@ -1,14 +1,15 @@
 #include "../head/LinkStack.h"
 #include "../LinkStack/LinkStack.cpp"
 
+
 int main(){
 	LinkStack *s = (LinkStack *)malloc(sizeof(LinkStack));
-	int flag = 0;
 	ElemType topData;
 	int length = 0;
 	char arr[100];
 	char *p;
 	ElemType data;
+	int isInit = 0;
 	
 	printf("请选择您的操作：(只读取一个有效值)\n");
 	printf("1.初始化栈\n");
@@ -36,17 +37,21 @@ int main(){
 				printf("再见！");
 				exit(0);
 			case '1':
-				//printf("%d\n", &s);
-				if( initLStack(s) ){
-					printf("初始化栈成功！\n");
-					//printf("%d",s.count);
-					flag = 1;
+				if( isInit == 0){
+					//printf("%d\n", &s);
+					if( initLStack(s) ){
+						printf("初始化栈成功！\n");
+						//printf("%d",s.count);
+						isInit = 1;
+					}else{
+						printf("初始化栈失败！\n");
+					}
 				}else{
-					printf("初始化栈失败！\n");
+					printf("栈已经初始化！\n");
 				}
 				break;
 			case '2':
-				if(flag == 1){
+				if(isInit == 1){
 					if( isEmptyLStack(s) ){
 						printf("栈为空！\n");
 					}else{
@@ -57,7 +62,7 @@ int main(){
 				}
 				break;
 			case '3':
-				if(flag == 1){
+				if(isInit == 1){
 					if( getTopLStack(s,&topData) ){
 						printf("栈顶元素为：%d\n",topData);
 					}else{
@@ -68,7 +73,7 @@ int main(){
 				}
 				break;
 			case '4':
-				if(flag == 1){
+				if(isInit == 1){
 					if(clearLStack(s)){
 						printf("清空栈成功！\n");
 					}else{
@@ -79,10 +84,10 @@ int main(){
 				}
 				break;
 			case '5':
-				if(flag == 1){
+				if(isInit == 1){
 					if( destroyLStack(s) ){
 						printf("销毁栈成功！\n");
-						flag = 0;
+						isInit = 0;
 					}else{
 						printf("销毁栈失败!\n");
 					}
@@ -91,7 +96,7 @@ int main(){
 				}
 				break;
 			case '6':
-				if(flag == 1){
+				if(isInit == 1){
 					if( LStackLength(s,&length) ){
 						printf("栈长度为：%d\n",length);
 					}else{
@@ -102,7 +107,7 @@ int main(){
 				}
 				break;
 			case '7':
-				if(flag == 1){
+				if(isInit == 1){
 					if( LStackLength(s,&length) ){
 						printf("请输入入栈元素:");
 						scanf("%s",&arr);
@@ -126,7 +131,7 @@ int main(){
 				}
 				break;
 			case '8':
-				if(flag == 1){
+				if(isInit == 1){
 					if( popLStack(s,&topData) ){
 						printf("出栈元素为：%d\n",topData);
 					}else{

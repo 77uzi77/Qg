@@ -1,5 +1,6 @@
 #include "../head/SqStack.h"
 #include "../SqStack/SqStack.cpp"
+
 int main(){
 	SqStack s;
 	int sizes;
@@ -9,7 +10,7 @@ int main(){
 	char *p;
 	ElemType data = 0;
 	ElemType outPut;
-	int flag = 0;
+	int isInit = 0;
 	
 	printf("请选择您的操作：(只读取一个有效值)\n");
 	printf("1.初始化栈\n");
@@ -39,26 +40,32 @@ int main(){
 				exit(0);
 			case '1':
 				while(1){
-					sizes = 0;
-					printf("请输入栈的大小：");
-					scanf("%d",&sizes);
-					fflush(stdin);
-					//printf("%d",case1Input);
-					if(sizes > 0){
-						if( initStack(&s,sizes) ){
-							printf("初始化栈成功！\n");
-							flag = 1;
-							break;
+					if(isInit == 0){
+						sizes = 0;
+						printf("请输入栈的大小：");
+						scanf("%d",&sizes);
+						fflush(stdin);
+						//printf("%d",case1Input);
+						if(sizes > 0 ){
+							if( initStack(&s,sizes) ){
+								printf("初始化栈成功！\n");
+								isInit = 1;
+								isInit = 1;
+								break;
+							}else{
+								printf("初始化栈失败！\n");
+							}
 						}else{
-							printf("初始化栈失败！\n");
+							printf("请输入正确的大小！\n");
 						}
 					}else{
-						printf("请输入正确的大小！\n");
-					}
+							printf("栈已经初始化！\n");
+							break;
+						}		
 				}
 				break;
 			case '2':
-				if(flag == 1){
+				if(isInit == 1){
 					if(isEmptyStack(&s)){
 						printf("栈为空！\n");
 					}else{
@@ -69,7 +76,7 @@ int main(){
 				}
 				break;
 			case '3':
-				if(flag == 1){
+				if(isInit == 1){
 					if( getTopStack(&s,&StackTop) ){
 						printf("栈顶元素为：%d\n",StackTop);
 					}else{
@@ -80,7 +87,7 @@ int main(){
 				}
 				break;
 			case '4':
-				if(flag == 1){
+				if(isInit == 1){
 					if( clearStack(&s) ){
 						printf("清空栈成功！\n");
 					}else{
@@ -91,10 +98,11 @@ int main(){
 				}
 				break;
 			case '5':
-				if(flag == 1){
+				if(isInit == 1){
 					if( destroyStack(&s) ){
 						printf("销毁栈成功！\n");
-						flag = 0;
+						isInit = 0;
+						isInit = 0;
 					}else{
 						printf("销毁栈失败！\n");
 					}
@@ -103,7 +111,7 @@ int main(){
 				}
 				break;
 			case '6':
-				if(flag == 1){
+				if(isInit == 1){
 					if( stackLength(&s,&length) ){
 						printf("栈的长度为：%d\n",length);
 					}else{
@@ -114,7 +122,7 @@ int main(){
 				}
 				break;
 			case '7':
-				if(flag == 1){
+				if(isInit == 1){
 					if( stackLength(&s,&length) ){
 						if( length <= sizes ){
 							printf("请输入入栈元素:");
@@ -142,7 +150,7 @@ int main(){
 				}
 				break;
 			case '8':
-				if(flag == 1){
+				if(isInit == 1){
 					if( popStack(&s,&outPut) ){
 						printf("出栈元素为:%d\n",outPut);
 					}else{
